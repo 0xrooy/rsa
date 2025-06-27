@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:apache
+    container_name: rsa_web
+    volumes:
+      - ./html:/var/www/html
+    ports:
+      - "8080:80"
+  
+  db:
+    image: mysql:5.7
+    container_name: rsa_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rsa_db
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: rsa_phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
