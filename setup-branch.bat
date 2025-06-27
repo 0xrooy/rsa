@@ -1,5 +1,7 @@
 @echo off
-set /p NAME=Enter your name (e.g., rooy, hanim, nurina): 
+echo What is your name? (e.g. siti, nur)
+set /p NAME=
 git checkout -b %NAME%-branch
+git pull origin main
 git push origin %NAME%-branch
 pause
