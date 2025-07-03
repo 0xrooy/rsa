@@ -11,6 +11,10 @@ session_start();
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -20,33 +24,50 @@ session_start();
       justify-content: center;
       align-items: center;
       font-family: 'Press Start 2P', cursive;
+      color: #00ff00;
     }
 
     .container {
       text-align: center;
+      max-width: 90%;
     }
 
     .title {
-      color: #00ff00;
-      font-size: 24px;
-      margin-bottom: 50px;
+      font-size: 26px;
+      margin-bottom: 60px;
+      text-shadow: 2px 2px 4px #000;
     }
 
     .btn {
       display: block;
-      width: 250px;
-      margin: 15px auto;
+      width: 260px;
+      margin: 20px auto;
       padding: 20px;
       font-size: 14px;
       background-color: #c0c0c0;
       border: 2px solid black;
+      border-radius: 10px;
       text-decoration: none;
       color: black;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
       background-color: #e0e0e0;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+      .btn {
+        width: 90%;
+        font-size: 12px;
+        padding: 15px;
+      }
+
+      .title {
+        font-size: 18px;
+        margin-bottom: 40px;
+      }
     }
   </style>
 </head>
