@@ -2,11 +2,29 @@ version: '3.8'
 
 services:
   php:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
     volumes:
       - ./html:/var/www/html
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend-next
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+
+  backend:
+    build: ./backend-fastapi
+    ports:
+      - "8000:8000"
     depends_on:
       - db
 
