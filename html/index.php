@@ -56,7 +56,7 @@ session_start();
 
     <a href="new_game.php" class="btn">NEW GAME</a>
     <a href="existing_game.php" class="btn">EXISTING GAME</a>
-    <a href="leaderboard.php" class="btn">LEADERBOARD</a>
+    <a href="http://localhost:3000/leaderboard" class="btn">LEADERBOARD</a>
     <a href="how_to_play.php" class="btn">HOW TO PLAY</a>
   </div>
 </body>

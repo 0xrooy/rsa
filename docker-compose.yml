@@ -4,6 +4,7 @@ services:
   php:
     build:
       context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
     volumes:
@@ -11,8 +12,25 @@ services:
     depends_on:
       - db
 
+  frontend:
+    build: ./frontend-next
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+
+  backend:
+    build: ./backend-fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
   db:
     image: mysql:5.7
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: rsa_db
@@ -20,19 +38,3 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
-
-  fastapi:
-    build:
-      context: ./backend-fastapi
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-
-  nextjs:
-    build:
-      context: ./frontend-next
-    ports:
-      - "3000:3000"
-    depends_on:
-      - fastapi

@@ -19,7 +19,7 @@ export default function Leaderboard() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-black to-indigo-900 font-press-start text-center text-white p-6">
       <div>
-        <h1 className="text-green-400 text-xl md:text-2xl mb-8">LEADERBOARD</h1>
+        <h1 className="text-green-400 text-xl md:text-2xl mb-8">LEADERBD hello there</h1>
         <ul className="space-y-4 text-sm md:text-base">
           {scores.map(score => (
             <li
