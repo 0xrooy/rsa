@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: rsa-php
     ports:
       - "8080:80"
     volumes:
@@ -13,16 +14,22 @@ services:
       - db
 
   frontend:
-    build: ./frontend-next
+    build:
+      context: ./frontend-next
+      dockerfile: Dockerfile
+    image: rsa-frontend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - backend
     environment:
       - NEXT_PUBLIC_API_URL=http://backend:8000
 
   backend:
-    build: ./backend-fastapi
+    build:
+      context: ./backend-fastapi
+      dockerfile: Dockerfile
+    image: rsa-backend
     ports:
       - "8000:8000"
     depends_on:
@@ -30,6 +37,7 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: rsa-db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -38,3 +46,15 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - db
