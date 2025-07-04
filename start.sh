@@ -1,3 +1,3 @@
 echo "Start Docker container.."
-docker compose up --build
+docker compose up
 chmod +x start.sh
