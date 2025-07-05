@@ -11,10 +11,6 @@ session_start();
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       padding: 0;
@@ -24,7 +20,6 @@ session_start();
       justify-content: center;
       align-items: center;
       font-family: 'Press Start 2P', cursive;
-      color: #00ff00;
     }
 
     .game-container {
@@ -40,7 +35,6 @@ session_start();
       position: relative;
       overflow: hidden;
       text-align: center;
-<<<<<<< HEAD:html/index.php
       padding: 40px 20px;
       border-radius: 30px;
     }
@@ -49,52 +43,24 @@ session_start();
       color: #00ff00;
       font-size: 24px;
       margin-bottom: 40px;
-=======
-      max-width: 90%;
-    }
-
-    .title {
-      font-size: 26px;
-      margin-bottom: 60px;
-      text-shadow: 2px 2px 4px #000;
->>>>>>> c101c9e6dc70aa7a7212f8652f5e289f12216bf5:html/main.php
     }
 
     .btn {
       display: block;
-      width: 260px;
-      margin: 20px auto;
+      width: 250px;
+      margin: 15px auto;
       padding: 20px;
       font-size: 14px;
       background-color: #c0c0c0;
       border: 2px solid black;
-      border-radius: 10px;
       text-decoration: none;
       color: black;
-<<<<<<< HEAD:html/index.php
       transition: background-color 0.3s ease;
       border-radius: 30px; /* rounded buttons */
-=======
-      transition: all 0.3s ease;
->>>>>>> c101c9e6dc70aa7a7212f8652f5e289f12216bf5:html/main.php
     }
 
     .btn:hover {
       background-color: #e0e0e0;
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 480px) {
-      .btn {
-        width: 90%;
-        font-size: 12px;
-        padding: 15px;
-      }
-
-      .title {
-        font-size: 18px;
-        margin-bottom: 40px;
-      }
     }
   </style>
 </head>
