@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSA Pixel Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="background-pattern"></div>
+      <div class="game-header">
+        <div class="stage-indicator">
+          Stage <span id="currentStage">SELECT</span>
+        </div>
+        <div class="game-title">RSA CRYPTOGRAPHY ADVENTURE</div>
+        <div class="timer-display">Time: <span id="timer">--:--</span></div>
+      </div>
+
+      <div class="game-content">
+        <div id="difficultySelect" class="stage-content">
+          <div class="stage-title">🎮 SELECT DIFFICULTY</div>
+          <div class="stage-description">
+            Choose your challenge level! Each difficulty uses different prime
+            number ranges and affects what messages you can encrypt.
+          </div>
+
+          <div class="difficulty-options">
+            <div
+              class="difficulty-card easy"
+              onclick="selectDifficulty('easy')"
+            >
+              <div class="difficulty-title">🟢 EASY</div>
+              <div class="difficulty-desc">
+                Prime range: 3-20<br />
+                Good for: Simple symbols & digits<br />
+              </div>
+            </div>
+
+            <div
+              class="difficulty-card medium"
+              onclick="selectDifficulty('medium')"
+            >
+              <div class="difficulty-title">🟡 MEDIUM</div>
+              <div class="difficulty-desc">
+                Prime range: 10-50<br />
+                Good for: Letters & numbers<br />
+              </div>
+            </div>
+
+            <div
+              class="difficulty-card hard"
+              onclick="selectDifficulty('hard')"
+            >
+              <div class="difficulty-title">🔴 HARD</div>
+              <div class="difficulty-desc">
+                Prime range: 50-200<br />
+                Good for: Any text & symbols<br />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="stage1" class="stage-content" style="display: none">
+          <div class="stage-title">🔐 STAGE 1: PRIME FOUNDATIONS</div>
+          <div class="stage-description">
+            Welcome, crypto-miner! To forge your RSA keys, you need two prime
+            numbers. Enter two different prime numbers (p and q) to start your
+            encryption journey!
+            <br /><br />💡
+          </div>
+
+          <div class="two-column">
+            <div class="input-group">
+              <label class="input-label">Prime Number P:</label>
+              <input
+                type="number"
+                id="primeP"
+                class="pixel-input"
+                placeholder="Enter prime p"
+              />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Prime Number Q:</label>
+              <input
+                type="number"
+                id="primeQ"
+                class="pixel-input"
+                placeholder="Enter prime q"
+              />
+            </div>
+          </div>
+
+          <button class="pixel-button" onclick="validatePrimes()">
+            FORGE KEYS
+          </button>
+          <div id="stage1Message"></div>
+        </div>
+
+        <div id="stage2" class="stage-content" style="display: none">
+          <div class="stage-title">🔑 STAGE 2: PUBLIC KEY CREATION</div>
+          <div class="stage-description">
+            Excellent! Your RSA parameters are ready. Now calculate your public
+            key exponent (e). Choose a number that is coprime with φ(n) =
+            (p-1)(q-1).
+          </div>
+
+          <div id="rsaInfo" class="info-display"></div>
+
+          <div class="input-group">
+            <label class="input-label">Public Key Exponent (e):</label>
+            <input
+              type="number"
+              id="publicKeyE"
+              class="pixel-input"
+              placeholder="Enter public key e"
+            />
+          </div>
+
+          <button class="pixel-button" onclick="validatePublicKey()">
+            VERIFY KEY
+          </button>
+          <div id="stage2Message"></div>
+        </div>
+
+        <div id="stage3" class="stage-content" style="display: none">
+          <div class="stage-title">📝 STAGE 3: MESSAGE ENCRYPTION</div>
+          <div class="stage-description">
+            Time to encrypt a secret message! Enter your plaintext message
+            below. Watch as it transforms into an encrypted cipher using your
+            RSA keys!
+          </div>
+
+          <div id="keyInfo" class="info-display"></div>
+
+          <div class="input-group">
+            <label class="input-label">Secret Message:</label>
+            <input
+              type="text"
+              id="plaintext"
+              class="pixel-input"
+              placeholder="Enter your secret message"
+            />
+          </div>
+
+          <button class="pixel-button" onclick="encryptMessage()">
+            ENCRYPT MESSAGE
+          </button>
+          <div id="stage3Message"></div>
+          <div id="encryptedDisplay"></div>
+        </div>
+
+        <div id="stage4" class="stage-content" style="display: none">
+          <div class="stage-title">🔓 STAGE 4: DECRYPTION CHALLENGE</div>
+          <div class="stage-description">
+            Final challenge! Here's your encrypted message. To decrypt it, you
+            need to calculate the private key (d) where d × e ≡ 1 (mod φ(n)).
+            Enter the private key to decrypt!
+          </div>
+
+          <div id="finalEncrypted" class="encrypted-text"></div>
+          <div id="decryptionInfo" class="info-display"></div>
+
+          <div class="input-group">
+            <label class="input-label">Private Key (d):</label>
+            <input
+              type="number"
+              id="privateKeyD"
+              class="pixel-input"
+              placeholder="Enter private key d"
+            />
+          </div>
+
+          <button class="pixel-button" onclick="decryptMessage()">
+            DECRYPT MESSAGE
+          </button>
+          <div id="stage4Message"></div>
+        </div>
+
+        <div id="gameComplete" class="game-complete" style="display: none">
+          <div class="stage-title">🎉 CONGRATULATIONS!</div>
+          <div class="stage-description">
+            You've successfully mastered RSA encryption! You've learned how to:
+            <br />• Generate prime numbers for RSA <br />• Calculate public and
+            private keys <br />• Encrypt and decrypt messages
+          </div>
+          <div class="completion-time">
+            Completion Time: <span id="finalTime"></span>
+          </div>
+          <div class="final-buttons">
+            <button class="pixel-button success-button" onclick="restartGame()">
+              PLAY AGAIN
+            </button>
+            <button class="pixel-button" onclick="goHome()">HOME</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
