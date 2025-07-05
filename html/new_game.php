@@ -1,9 +1,14 @@
+<<<<<<< HEAD
+=======
+<!-- new_game.php -->
+>>>>>>> c101c9e6dc70aa7a7212f8652f5e289f12216bf5
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>New Game</title>
   <style>
+<<<<<<< HEAD
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
     body {
@@ -67,10 +72,35 @@
 
     button:hover {
       background-color: #00ff00;
+=======
+    body {
+      background: linear-gradient(to right, black, #1e1e90);
+      font-family: 'Courier New', monospace;
+      color: #00FF00;
+      text-align: center;
+      margin-top: 15%;
+    }
+    input[type="text"] {
+      font-size: 24px;
+      width: 50%;
+      padding: 10px;
+      border-radius: 25px;
+      border: none;
+      background: #ccc;
+      text-align: center;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+>>>>>>> c101c9e6dc70aa7a7212f8652f5e289f12216bf5
     }
   </style>
 </head>
 <body>
+<<<<<<< HEAD
   <div class="game-container">
     <h1>ENTER YOUR NAME TO PLAY</h1>
     <form action="game.html" method="GET">
@@ -79,5 +109,13 @@
       <button type="submit">Continue</button>
     </form>
   </div>
+=======
+  <h1>ENTER YOUR NAME TO PLAY</h1>
+  <form action="level.php" method="GET">
+    <input type="text" name="username" required placeholder="Type your name" />
+    <br>
+    <button type="submit">Continue</button>
+  </form>
+>>>>>>> c101c9e6dc70aa7a7212f8652f5e289f12216bf5
 </body>
 </html>
