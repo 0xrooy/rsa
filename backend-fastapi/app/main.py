@@ -1,12 +1,15 @@
 from fastapi import FastAPI
-from .routes import leaderboard
-from .database import engine
-from .models import Base
+from fastapi.middleware.cors import CORSMiddleware
+from routes import leaderboard  # <-- your route module
 
 app = FastAPI()
 
-# Create tables if not exist
-Base.metadata.create_all(bind=engine)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3001"],  # frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Include leaderboard routes
-app.include_router(leaderboard.router, prefix="/api/leaderboard")
+app.include_router(leaderboard.router)
