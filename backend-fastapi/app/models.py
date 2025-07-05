@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Integer, String
 from .database import Base
 
-class Score(Base):
-    __tablename__ = "scores"
-    id = Column(Integer, primary_key=True, index=True)
+class Gamer(Base):
+    __tablename__ = "gamer"
+
+    userID = Column(Integer, primary_key=True, index=True)
     username = Column(String(100), nullable=False)
-    points = Column(Integer, nullable=False)
+    score = Column(Integer, nullable=False)
