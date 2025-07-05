@@ -46,6 +46,8 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql  # ✅ persistent storage for db
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -58,3 +60,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     depends_on:
       - db
+
+volumes:
+  mysql_data:  # ✅ declare the volume here
