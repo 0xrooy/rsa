@@ -15,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={pressStart2P.variable}>
-      <body className="bg-black text-white">{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

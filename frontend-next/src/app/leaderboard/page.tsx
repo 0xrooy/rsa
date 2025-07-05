@@ -11,8 +11,9 @@ type Score = {
 export default function Leaderboard() {
   const [scores, setScores] = useState<Score[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://backend:8000'
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
@@ -23,7 +24,9 @@ export default function Leaderboard() {
         setScores(data)
       } catch (err) {
         console.error('Fetch failed:', err)
-        setError('Failed to load leaderboard. Please try again later.')
+        setError('❌ Failed to load leaderboard. Please try again later.')
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -31,22 +34,32 @@ export default function Leaderboard() {
   }, [apiUrl])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-black to-indigo-900 font-press-start text-center text-white p-6">
-      <div>
-        <h1 className="text-green-400 text-xl md:text-2xl mb-8">🏆 LEADERBOARD</h1>
-        {error ? (
-          <div className="text-red-400">{error}</div>
+    <div className="game-container">
+      <div className="game-header">
+        <div className="stage-indicator">Stage 1</div>
+        <h1 className="game-title">🏆 LEADERBOARD</h1>
+        <div className="timer-display">LIVE</div>
+      </div>
+
+      <div className="game-content">
+        {loading ? (
+          <div className="info-display">Loading leaderboard...</div>
+        ) : error ? (
+          <div className="error-message">{error}</div>
         ) : (
-          <ul className="space-y-4 text-sm md:text-base">
-            {scores.map(score => (
-              <li
-                key={score.userID}
-                className="bg-gray-300 text-black py-3 px-6 border-2 border-black w-[300px] mx-auto"
-              >
-                {score.username}: {score.score} pts
-              </li>
-            ))}
-          </ul>
+          <div className="stage-content">
+            <h2 className="stage-title">Top Scorers</h2>
+            <ul className="text-white text-xs space-y-4">
+              {scores.map((score, index) => (
+                <li
+                  key={score.userID}
+                  className="difficulty-card"
+                >
+                  #{index + 1} — {score.username}: {score.score} pts
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </div>

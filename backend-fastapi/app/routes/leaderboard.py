@@ -6,7 +6,6 @@ from ..schemas import GamerOut
 from typing import List
 
 router = APIRouter(
-    prefix="/api/leaderboard",
     tags=["Leaderboard"]
 )
 
