@@ -1,10 +1,17 @@
 FROM php:7.4-apache
 
-# Install mysqli
-RUN docker-php-ext-install mysqli
+# Install required PHP extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Enable mod_rewrite if needed (optional for routing)
+# Enable Apache mod_rewrite (for clean URLs if needed later)
 RUN a2enmod rewrite
 
-# Copy your code into the container
-COPY . /var/www/html
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy project files into container
+COPY ./html/ /var/www/html/
+
+# Optional: Give proper permissions (useful if files get locked)
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Existing RSA Games</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="game-header">
+        <div class="stage-indicator">STAGE: EXISTING</div>
+        <div class="game-title">🎮 EXISTING RSA GAME SESSIONS</div>
+        <div class="timer-display">LIST</div>
+      </div>
+
+      <div class="game-content">
+        <div class="stage-content">
+          <div class="stage-title">🗂 YOUR SAVED GAMES</div>
+          <div class="stage-description">
+            Select a game to resume. You can continue or inspect completed sessions.
+          </div>
+
+          <table class="pixel-input" style="width:100%; font-size: 8px; color:white;">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Score</th>
+                <th>Difficulty</th>
+                <th>Status</th>
+                <th>Updated</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="gamesTableBody">
+              <!-- Rows will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="existing-game.js"></script>
+  </body>
+</html>

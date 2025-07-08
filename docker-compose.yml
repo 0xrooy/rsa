@@ -47,7 +47,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql  # ✅ persistent storage for db
+      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -62,4 +62,4 @@ services:
       - db
 
 volumes:
-  mysql_data:  # ✅ declare the volume here
+  mysql_data:
