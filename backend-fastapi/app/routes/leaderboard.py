@@ -1,20 +1,13 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..database import SessionLocal
-from ..models import Gamer
-from ..schemas import GamerOut
+from app.database import get_db
+from app.models import Gamer
+from app.schemas import GamerOut
 from typing import List
 
 router = APIRouter(
     tags=["Leaderboard"]
 )
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.get("/", response_model=List[GamerOut])
 def get_leaderboard(db: Session = Depends(get_db)):
