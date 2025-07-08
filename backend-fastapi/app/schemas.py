@@ -3,19 +3,11 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class GamerOut(BaseModel):
-    userID: int
+class LeaderboardEntry(BaseModel):
+    gameID: int
     username: str
     score: int
-
-    class Config:
-        orm_mode = True
-
-class ExistingGameResponse(BaseModel):
-    gameID: int
-    gameName: str
-    username: str
-    currentScore: int
+    difficulty: str
     gameStatus: str
     lastUpdated: datetime
 

@@ -18,12 +18,25 @@
       </div>
 
       <div class="game-content">
-        <div id="difficultySelect" class="stage-content">
+
+        <div id="usernamePrompt" class="stage-content" style="display: block;">
+          <div class="stage-title">🙋 ENTER YOUR NAME</div>
+          <div class="stage-description">Start your cryptography journey by entering a cool username.</div>
+          <div class="input-group">
+            <label class="input-label">Username:</label>
+            <input type="text" id="usernameInput" class="pixel-input" placeholder="Your name here..." />
+          </div>
+          <button class="pixel-button" onclick="startGame()">START</button>
+        </div>
+
+
+        <div id="difficultySelect" class="stage-content" style="display: none;">
           <div class="stage-title">🎮 SELECT DIFFICULTY</div>
           <div class="stage-description">
             Choose your challenge level! Each difficulty uses different prime
             number ranges and affects what messages you can encrypt.
           </div>
+
 
           <div class="difficulty-options">
             <div
@@ -198,5 +211,25 @@
     </div>
 
     <script src="script.js"></script>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      alert("DOM Loaded!");
+      const username = localStorage.getItem("username");
+
+      ["usernamePrompt", "difficultySelect", "stage1", "stage2", "stage3", "stage4", "gameComplete"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+      }); 
+
+      if (!username) {
+        document.getElementById("usernamePrompt").style.display = "block";
+      } else {
+        document.getElementById("difficultySelect").style.display = "block";
+      }
+    });
+    </script>
+
   </body>
 </html>
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RSA Leaderboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="background-pattern"></div>
+
+      <div class="game-header">
+        <div class="stage-indicator">LEADERBOARD</div>
+        <div class="game-title">RSA CRYPTOGRAPHY HIGH SCORES</div>
+        <div class="timer-display">Top by Difficulty</div>
+      </div>
+
+      <div class="game-content">
+        <div class="stage-content">
+          <div class="stage-title">🏆 SELECT DIFFICULTY</div>
+
+          <div class="difficulty-options">
+            <div class="difficulty-card easy" onclick="loadLeaderboard('easy')">
+              <div class="difficulty-title">🟢 EASY</div>
+              <div class="difficulty-desc">Top scores: Prime 3–20</div>
+            </div>
+            <div class="difficulty-card medium" onclick="loadLeaderboard('medium')">
+              <div class="difficulty-title">🟡 MEDIUM</div>
+              <div class="difficulty-desc">Top scores: Prime 10–50</div>
+            </div>
+            <div class="difficulty-card hard" onclick="loadLeaderboard('hard')">
+              <div class="difficulty-title">🔴 HARD</div>
+              <div class="difficulty-desc">Top scores: Prime 50–200</div>
+            </div>
+          </div>
+
+          <table style="width:100%; margin-top: 20px; font-size: 10px; color: white;">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Score</th>
+                <th>Status</th>
+                <th>Last Played</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardTableBody"></tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="leaderboard.js"></script>
+  </body>
+</html>

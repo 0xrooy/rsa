@@ -27,6 +27,34 @@ function startTimer() {
   }, 1000);
 }
 
+function startGame() {
+  const username = document.getElementById("usernameInput").value.trim();
+  if (!username) {
+    alert("Please enter a username!");
+    return;
+  }
+
+  localStorage.setItem("username", username);
+  gameState.username = username; // ✅ Store in gameState for later
+
+  // 🔥 Register username if not exists
+  fetch("api/register_user.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username })
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("User registered:", data);
+    document.getElementById("usernamePrompt").style.display = "none";
+    document.getElementById("difficultySelect").style.display = "block";
+    document.getElementById("currentStage").textContent = "SELECT";
+  })
+  .catch((err) => {
+    console.error("Failed to register user:", err);
+  });
+}
+
 function selectDifficulty(level) {
   gameState.difficulty = level;
   gameState.stage = 1;
@@ -383,16 +411,39 @@ function completeGame() {
   const elapsed = Date.now() - gameState.startTime;
   const minutes = Math.floor(elapsed / 60000);
   const seconds = Math.floor((elapsed % 60000) / 1000);
-  const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}`;
+  const timeStr = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
   document.getElementById(`stage${gameState.stage}`).style.display = "none";
   document.getElementById("gameComplete").style.display = "block";
   document.getElementById("finalTime").textContent = timeStr;
 
   clearInterval(timerInterval);
+
+  // 🔥 POST to PHP to save game result
+  const gameID = new URLSearchParams(window.location.search).get("gameID") || null;
+  const username = localStorage.getItem("username") || "guest";  // 👈 or use actual username logic
+  const payload = {
+    username: username,
+    gameID: gameID,
+    score: gameState.plaintext.length * 100,  // ✏️ scoring logic here
+    difficulty: gameState.difficulty,
+    gameStatus: "completed"
+  };
+
+  fetch("api/save_score.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("Saved:", data);
+  })
+  .catch((err) => {
+    console.error("Error saving score:", err);
+  });
 }
+
 
 function restartGame() {
   gameState = {
@@ -429,3 +480,30 @@ function goHome() {
 
 // Initialize the game - show difficulty selection
 document.getElementById("currentStage").textContent = "SELECT";
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("username");
+
+  // Hide all possible sections
+  ["usernamePrompt", "difficultySelect", "stage1", "stage2", "stage3", "stage4", "gameComplete"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+
+  if (!username) {
+    // 🟢 First-time user, ask for name
+    document.getElementById("usernamePrompt").style.display = "block";
+    document.getElementById("currentStage").textContent = "ENTER NAME";
+  } else {
+    // 🟡 Returning user, skip to difficulty
+    gameState.username = username;
+    document.getElementById("difficultySelect").style.display = "block";
+    document.getElementById("currentStage").textContent = "SELECT";
+  }
+
+  // Reset timer display
+  document.getElementById("timer").textContent = "--:--";
+});
+
+
