@@ -69,8 +69,11 @@ session_start();
     <div class="title">WELCOME TO RSA</div>
 
     <a href="game.html" class="btn">NEW GAME</a>
-    <a href="existing_game.php" class="btn">EXISTING GAME</a>
-    <a href="leaderboard.php" class="btn">LEADERBOARD</a>
+
+    <a href="http://localhost:3001/existing-game" class="btn">EXISTING GAME</a>
+    <a href="http://localhost:3001/leaderboard" class="btn">LEADERBOARD</a>
+    <a href="how_to_play.php" class="btn">HOW TO PLAY</a>
+
   </div>
 </body>
 </html>

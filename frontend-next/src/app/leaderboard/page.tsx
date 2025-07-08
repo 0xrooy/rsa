@@ -13,7 +13,7 @@ export default function Leaderboard() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://backend:8000'
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
